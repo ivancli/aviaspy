@@ -32,4 +32,11 @@ interface ProxyIpContract
      * @return void
      */
     public function destroy(ProxyIp $proxyIp);
+
+    /**
+     * Test provided proxy ip validity
+     * @param ProxyIp $proxyIp
+     * @return boolean
+     */
+    public function test(ProxyIp $proxyIp);
 }

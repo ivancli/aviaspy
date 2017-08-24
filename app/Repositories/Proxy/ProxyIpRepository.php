@@ -14,6 +14,8 @@ use App\Models\ProxyIp;
 
 class ProxyIpRepository implements ProxyIpContract
 {
+    const WAIT_TIMEOUT = 3;
+
     protected $proxyIpModel;
 
     public function __construct(ProxyIp $proxyIp)
@@ -54,5 +56,18 @@ class ProxyIpRepository implements ProxyIpContract
     public function destroy(ProxyIp $proxyIp)
     {
         $proxyIp->delete();
+    }
+
+    /**
+     * Test provided proxy ip validity
+     * @param ProxyIp $proxyIp
+     * @return boolean
+     */
+    public function test(ProxyIp $proxyIp)
+    {
+        if (@fsockopen($proxyIp->ip, $proxyIp->port, $errCode, $errStr, self::WAIT_TIMEOUT) !== false) {
+            return true;
+        }
+        return false;
     }
 }

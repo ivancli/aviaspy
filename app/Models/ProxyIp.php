@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProxyIp extends Model
 {
-    protected $primaryKey = [
-        'ip',
-        'port',
-    ];
-
     protected $fillable = [
         'ip',
         'port',
@@ -37,5 +32,13 @@ class ProxyIp extends Model
     public function setActiveAttribute($value)
     {
         array_set($this->attributes, 'active', $value === true ? 1 : 0);
+    }
+
+    /*helpers*/
+
+    public function setActive($active = true)
+    {
+        $this->active = $active;
+        $this->save();
     }
 }

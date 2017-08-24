@@ -14,9 +14,10 @@ class CreateProxyIpsTable extends Migration
     public function up()
     {
         Schema::create('proxy_ips', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('ip');
             $table->integer('port');
-            $table->primary(['ip', 'port']);
+            $table->unique(['ip', 'port']);
             $table->tinyInteger('active')->default(1);
             $table->string('provider')->nullable();
             $table->timestamps();

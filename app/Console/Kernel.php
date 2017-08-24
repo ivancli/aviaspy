@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Proxy\Crawl::class,
+        Commands\Proxy\Validate::class,
     ];
 
     /**
