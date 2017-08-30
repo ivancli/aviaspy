@@ -20,7 +20,6 @@ class TestController extends Controller
 
     public function index()
     {
-        $proxyIps = $this->proxyIpRepo->all();
-        dd($proxyIps);
+
     }
 }

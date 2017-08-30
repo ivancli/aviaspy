@@ -38,4 +38,12 @@ class Kernel extends ConsoleKernel
     {
         require base_path('routes/console.php');
     }
+
+    private function __scheduleProxy(Schedule $schedule)
+    {
+        /*crawl proxy ips*/
+        $schedule->command('proxy:crawl')->twiceDaily();
+        /*validate existing proxy ips*/
+        $schedule->command('proxy:validate')->everyFiveMinutes();
+    }
 }

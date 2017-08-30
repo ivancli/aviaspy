@@ -26,14 +26,23 @@ class Crawl extends Command
 
     protected $proxyIpRepo;
 
+    protected $idCloak, $xRoxy;
+
     /**
      * Create a new command instance.
      *
      * @param ProxyIpContract $proxyIpContract
+     * @param IdCloak $idCloak
+     * @param XRoxy $xRoxy
      */
-    public function __construct(ProxyIpContract $proxyIpContract)
+    public function __construct(ProxyIpContract $proxyIpContract,
+                                IdCloak $idCloak, XRoxy $xRoxy)
     {
         $this->proxyIpRepo = $proxyIpContract;
+
+        $this->idCloak = $idCloak;
+        $this->xRoxy = $xRoxy;
+
         parent::__construct();
     }
 
@@ -44,11 +53,9 @@ class Crawl extends Command
      */
     public function handle()
     {
-        $idCloak = app()->make(IdCloak::class);
-        $this->crawlOneSite($idCloak);
+        $this->crawlOneSite($this->idCloak);
 
-        $xRoxy = app()->make(XRoxy::class);
-        $this->crawlOneSite($xRoxy);
+        $this->crawlOneSite($this->xRoxy);
     }
 
     /**
